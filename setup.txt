@@ -1,28 +1,47 @@
-# SETUP AND DEPLOYMENT GUIDE
-# Do this once in your terminal to setup a git alias
-# git config --global alias.deploy '!git tag "$(git log -1 --pretty=%B | head -n 1 | tr " " "-")-deploy" && git push origin --tags'
-# git config --global alias.latest '!git fetch origin -q && git log -1 origin/main --pretty=%B'
-# or in windows edit the .gitconfig file
+1. Setup github session in your terminalgit config --global user.email "you.email" 
+git config --global user.name "github.user"
+git config credential.helper cache
 
-# Allows you to edit the git config file
-git config --global --edit
+2. git clone https://github.com/joegagliardo/vibe-template.git
 
+3. change to the folder name to whatever you want and change to that folder
+
+4. # For Windows
+git config --global core.editor "notepad" 
+# Mac & Linux
+git config --global core.editor "nano" 
+
+5. git config --global --edit
+  add these lines if you want the shortcuts:
+
+[alias]
+    deploy = !git tag \"$(git log -1 --pretty=%B | head -n 1 | tr \" \" \"-$
+    latest = !git fetch origin -q && git log -1 origin/main --pretty=%B
+
+6. make your own git repo on github.com
+
+7. # For Windows
+git-new-push.bat <github-username> <repo-name>
+# Mac & Linux
+git-new-push.sh <github-username> <repo-name>
+
+8. Check to make sure that the files are on your github page
+
+9. make sure you are logged in with your gcloud credentials and set the application default credentials with:
+gcloud auth login --update-adc
+
+10. create a virtual environment, I use Python 3.11 for Cloud Run
+python -m venv .venv
 # activates the virtual environment
+# Windows
 .venv\Scripts\activate.bat
+# Mac & Linux
+source .venv/bin/activate
 
-# Then use:
-# git commit -am "x.x.x" 
-# git push
-# git deploy
+11. Choose the venv in your Antigravity IDE and choose the model to use for Code Assist
 
-
-
-deploy = "!f() { \
-    tag_name=$(git log -1 --pretty=%B | head -n 1 | tr ' ' '-')-deploy; \
-    git tag \"$tag_name\" && git push origin --tags; \
-}; f"
-latest = !git fetch origin -q && git log -1 origin/main --pretty=%B
-
+12. Setup a build trigger:
+    modify the create-build-trigger script for your OS to have your info
 
 
 ## 1. Local Setup
