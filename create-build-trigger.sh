@@ -4,5 +4,10 @@ export TRIGGER_NAME="deploy-on-tag-suffix"
 export GITHUB_OWNER=""
 export REPO_NAME=""
 
-# Inject variables and import
-envsubst < trigger.yaml.tmpl | gcloud alpha builds triggers import --source=- --region=global
+gcloud beta builds triggers create github \
+    --name="${REPO_NAME}-deploy-on-tag-suffix" \
+    --repo-owner="${GITHUB_OWNER}" \
+    --repo-name="${REPO_NAME}" \
+    --tag-pattern=".*-deploy$" \
+    --build-config="cloudbuild.yaml" \
+    --region="global"

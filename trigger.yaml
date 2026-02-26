@@ -1,12 +1,9 @@
-id: 498aeaf0-1ed1-4ff2-a537-0c48deb615b1
-name: deploy-on-tag-suffix
-resourceName: projects/surfn-peru/locations/global/triggers/498aeaf0-1ed1-4ff2-a537-0c48deb615b1
+# trigger.yaml.tmpl
+name: ${TRIGGER_NAME}
 filename: cloudbuild.yaml
 github:
-  owner: bwallerperu
-  name: expenses
+  owner: ${GITHUB_OWNER}
+  name: ${REPO_NAME}
   push:
-    # Matches any tag that ends with [deploy]
-    # Example matches: v1.0[deploy], release-abc[deploy]
-    tag: '.*\-deploy$'
-
+    tag: '.*-deploy$'
+  

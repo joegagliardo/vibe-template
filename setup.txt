@@ -41,6 +41,14 @@ source .venv/bin/activate
 11. Choose the venv in your Antigravity IDE and choose the model to use for Code Assist
 
 12. Setup a build trigger:
+gcloud beta builds triggers create github \
+    --name="deploy-on-tag-suffix" \
+    --repo-owner="" \
+    --repo-name="" \
+    --tag-pattern=".*-deploy$" \
+    --build-config="cloudbuild.yaml" \
+    --region="global"
+
     modify the create-build-trigger script for your OS to have your info
 
 
