@@ -23,6 +23,8 @@ git branch -M main
 git push -u origin main
 
 # 5. Rename current folder
-mv ../vibe-template ../$2
 cd ..
+mv vibe-template $2
+cd $2
+
 
